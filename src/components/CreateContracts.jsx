@@ -9,6 +9,7 @@ import { Avatar } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import CreateContractsCard from './CreateContractsCard';
 import Divider from '@mui/material/Divider';
+import ContractsCard from './ContractsCard';
 
 import mainPhoto from '../assets/mainPhoto.png';
 import sportPhoto from '../assets/sport.png';
@@ -46,6 +47,7 @@ export default function CreateContracts() {
   const handlePhoto = (index) => {
     setCurrentPhoto(index);
     console.log(index);
+    window.localStorage.setItem('currentPhoto', index);
   };
 
   return (

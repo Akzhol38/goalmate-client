@@ -1,13 +1,27 @@
 import * as React from 'react';
 import cardIcon from '../assets/cardIcon.svg';
-import contractCard from '../assets/contractCard.png';
+import contractCard from '../assets/mainPhoto.png';
+import sportPhoto from '../assets/sport.png';
+import foodPhoto from '../assets/food.png';
 import { Box, Paper, Typography } from '@mui/material';
 import ContractsCardMenu from './ContractsCardMenu';
 
 export default function ContractsCard({ title, dateFrom, dateTo, ids, handleCompleteContract }) {
+  const currentPhoto = Number(window.localStorage.getItem('currentPhoto'));
+
+  const handlePhoto = () => {
+    if (currentPhoto === 0) {
+      return contractCard;
+    } else if (currentPhoto === 1) {
+      return sportPhoto;
+    } else if (currentPhoto === 2) {
+      return foodPhoto;
+    }
+  };
+  console.log(currentPhoto);
   return (
     <Box sx={{ margin: '8px', position: 'relative' }}>
-      <img src={contractCard} alt="ContractCard" />
+      <img width={286} height={180} src={handlePhoto()} alt="ContractCard" />
 
       <Box sx={{ positon: 'absolute', top: 0, right: 0, bottom: 0 }}>
         <ContractsCardMenu id={ids} handleCompleteContract={handleCompleteContract} />

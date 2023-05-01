@@ -18,7 +18,7 @@ import Divider from '@mui/material/Divider';
 import { useSelector } from 'react-redux';
 import MainContentCard from './MainContentCard';
 
-export default function MainContent() {
+export default function MainContent({ firstname, lastname, userId }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -34,10 +34,6 @@ export default function MainContent() {
     p: 4,
   };
 
-  const storedFirstname = window.localStorage.getItem('firstname');
-  const storedLastname = window.localStorage.getItem('lastname');
-  const firstname = useSelector((state) => state.auth.data?.firstname) || storedFirstname;
-  const lastname = useSelector((state) => state.auth.data?.lastname) || storedLastname;
   return (
     <Card sx={{ width: 551, height: 970, mt: 15, ml: 5 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -76,7 +72,7 @@ export default function MainContent() {
         </Box>
       </Box>
       {/* <img src={mainPhoto} width="100%" height={658} /> */}
-      <MainContentCard />
+      <MainContentCard userId={userId} />
       <Box sx={{ display: 'flex', pl: '18px', pt: '19px', pb: '18px', pr: '18px' }}>
         <FavoriteBorderIcon sx={{ pr: '15px' }} />
         <ChatBubbleOutlineOutlinedIcon />

@@ -1,6 +1,6 @@
 import React from 'react';
 import './Home.scss';
-
+import axios from 'axios';
 import Category from '../../components/Category';
 import Header from '../../components/Header';
 import MainContent from '../../components/MainContent';
@@ -9,6 +9,22 @@ import Widget from '../../components/Widget';
 import { Container } from '@mui/material';
 const Home = () => {
   const [currentCategory, setCurrentCategory] = React.useState(0);
+  const [users, setUsers] = React.useState([]);
+  const [selectedUserId, setSelectedUserId] = React.useState(null);
+  const idUser = window.localStorage.getItem('id');
+  React.useEffect(() => {
+    axios
+      .get(`http://localhost:9088/api/v1/random-users?userId=${idUser}`)
+      .then((res) => {
+        setUsers(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.warn(error);
+        alert('Ошибка при получения статьи');
+      });
+  }, []);
+  console.log(users);
   return (
     <div className="app">
       <Header />
@@ -19,7 +35,9 @@ const Home = () => {
             <Category currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} />
           </div>
           <div>
-            <MainContent />
+            {users.map((user) => (
+              <MainContent firstname={user.firstname} lastname={user.lastname} userId={user.id} />
+            ))}
           </div>
           <div>
             <OtherAccount />

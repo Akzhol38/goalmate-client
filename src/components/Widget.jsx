@@ -14,16 +14,30 @@ export default function Widget() {
   const lastname = useSelector((state) => state.auth.data?.lastname) || storedLastname;
   const username = useSelector((state) => state.auth.data?.username) || storedUsername;
   const [data, setData] = React.useState([]);
+  const [followings, setFollowings] = React.useState([]);
+  const id = window.localStorage.getItem('id');
   React.useEffect(() => {
     axios
-      .get(`http://localhost:9088/api/v1/contracts/users/84e352bc-cbc2-47a5-8e69-19b3ca213abf`)
+      .get(`http://localhost:9088/api/v1/contracts/users/${id}`)
       .then((res) => {
         setData(res.data);
         console.log(res.data);
       })
       .catch((error) => {
         console.warn(error);
-        alert('Ошибка при получения статьи');
+        alert('Ошибка при получения количество контрактов');
+      });
+  }, []);
+
+  React.useEffect(() => {
+    axios
+      .get(`http://localhost:9088/api/v1/${id}/followed`)
+      .then((res) => {
+        setFollowings(res.data);
+      })
+      .catch((error) => {
+        console.warn(error);
+        alert('Ошибка при получения количество подписчиков');
       });
   }, []);
 
@@ -45,7 +59,7 @@ export default function Widget() {
       <Box sx={{ display: 'flex', alignItems: 'center', pt: '16px', pr: '20px' }}>
         <Box textAlign="center">
           <Typography fontSize={19} fontWeight={700}>
-            234
+            {followings.length}
           </Typography>
           <Typography>Подписчики</Typography>
         </Box>

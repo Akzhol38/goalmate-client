@@ -8,6 +8,7 @@ import { Box, Button, Paper, Typography, TextField } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { setContractData } from '../redux/slices/contractSlice';
+
 export default function CreateContractsCard({
   title,
   description,
@@ -22,6 +23,7 @@ export default function CreateContractsCard({
   setCurrentPhoto,
 }) {
   const token = window.localStorage.getItem('token');
+  const id = window.localStorage.getItem('id');
   const dispatch = useDispatch();
 
   const onSubmit = async () => {
@@ -42,7 +44,7 @@ export default function CreateContractsCard({
         },
       };
       const { data } = await axios.post(
-        'http://localhost:9088/api/v1/contracts/create',
+        `http://localhost:9088/api/v1/contracts/create?userId=${id}`,
         fields,
         config,
       );

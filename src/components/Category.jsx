@@ -29,6 +29,7 @@ const Category = () => {
       window.localStorage.removeItem('lastname');
       window.localStorage.removeItem('completedContracts');
       window.localStorage.removeItem('followings');
+      window.localStorage.removeItem('id');
     }
   };
 

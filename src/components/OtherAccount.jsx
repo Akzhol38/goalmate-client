@@ -6,9 +6,10 @@ import FollowingAccount from './FollowingAccount';
 import axios from 'axios';
 export default function OtherAccount() {
   const [users, setUsers] = React.useState([]);
+  const idUser = window.localStorage.getItem('id');
   React.useEffect(() => {
     axios
-      .get(`http://localhost:9088/api/v1/random-users/`)
+      .get(`http://localhost:9088/api/v1/random-users?userId=${idUser}`)
       .then((res) => {
         setUsers(res.data);
         console.log(res.data);

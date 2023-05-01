@@ -41,6 +41,7 @@ export default function RegisterPage() {
       window.localStorage.setItem('username', values.username);
       window.localStorage.setItem('firstname', data.payload.firstname);
       window.localStorage.setItem('lastname', data.payload.lastname);
+      window.localStorage.setItem('id', data.payload.id);
     }
   };
 

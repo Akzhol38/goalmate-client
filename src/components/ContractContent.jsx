@@ -58,12 +58,10 @@ export default function ContractContent() {
     );
   };
 
-  console.log(completedContracts);
+  const id = window.localStorage.getItem('id');
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:9088/api/v1/contracts/users/84e352bc-cbc2-47a5-8e69-19b3ca213abf`,
-      );
+      const { data } = await axios.get(`http://localhost:9088/api/v1/contracts/users/${id}`);
 
       setContracts(data);
     } catch (error) {
